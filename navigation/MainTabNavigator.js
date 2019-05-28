@@ -3,6 +3,7 @@ import { Platform } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 
 import TabBarIcon from '../components/TabBarIcon';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 import MyPageScreen from '../screens/MyPageScreen';
 import SpeedDatingScreen from '../screens/SpeedDatingScreen';
@@ -15,12 +16,9 @@ const MyPageStack = createStackNavigator({
 });
 
 MyPageStack.navigationOptions = {
-  tabBarLabel: 'MyPage',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'}
-    />
+  tabBarLabel: '마이페이지',
+  tabBarIcon: ({ tintColor }) => (
+    <Icon name='users' size={30} />
   ),
 };
 
@@ -30,7 +28,7 @@ const SpeedDatingStack = createStackNavigator({
 });
 
 SpeedDatingStack.navigationOptions = {
-  tabBarLabel: 'SpeedDating',
+  tabBarLabel: '만남',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
@@ -49,7 +47,7 @@ const NotificationStack = createStackNavigator({
 });
 
 NotificationStack.navigationOptions = {
-  tabBarLabel: 'Notification',
+  tabBarLabel: '알림',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
@@ -64,7 +62,7 @@ const ChattingStack = createStackNavigator({
 });
 
 ChattingStack.navigationOptions = {
-  tabBarLabel: 'Chatting',
+  tabBarLabel: '대화',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
@@ -74,8 +72,8 @@ ChattingStack.navigationOptions = {
 };
 
 export default createBottomTabNavigator({
-  MyPageScreen,
-  SpeedDatingScreen,
-  NotificationScreen,
-  ChattingScreen,
+  개인: MyPageScreen,
+  만남: SpeedDatingScreen,
+  알림: NotificationScreen,
+  대화: ChattingScreen,
 });

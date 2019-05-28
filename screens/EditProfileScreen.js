@@ -8,9 +8,7 @@ export default class EditProfileScreen extends React.Component {
   
     render() {
       return (
-        <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-          <Text>Home Screen</Text>
-        </View>
+        <View> 내 정보 수정 </View>
       );
     }
   }
