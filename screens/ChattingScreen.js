@@ -1,14 +1,54 @@
-import React from 'react';
-import { ExpoConfigView } from '@expo/samples';
+import React, { Component } from "react";
+import { FlatList, StyleSheet, Text, View } from "react-native";
 
-export default class SettingsScreen extends React.Component {
-  static navigationOptions = {
-    title: 'Chatting',
-  };
+import ChatRoomListItem from "../item_chatting/ChatRoomListItem";
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#1BA2FC",
+    paddingHorizontal: 32,
+    paddingTop: 64
+  }
+});
+
+export default class ChatRoomList extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      chatRooms: []
+    };
+  }
+
+  componentDidMount() {
+    fetch("http://localhost:3000/chat-rooms")
+      .then(response => {
+        return response.json();
+      })
+      .then(response => {
+        this.setState({ chatRooms: response.body });
+      })
+      .catch(error => {
+        console.log(error.message);
+      });
+  }
 
   render() {
-    /* Go ahead and delete ExpoConfigView and replace it with your
-     * content, we just wanted to give you a quick view of your config */
-    return <ExpoConfigView />;
+    return (
+      <View style={styles.container}>
+        <FlatList data={this.state.chatRooms} renderItem={this.renderItem} />
+      </View>
+    );
   }
+
+  renderItem = ({ item }) => {
+    return (
+      <ChatRoomListItem
+        name={item.name}
+        navigator={this.props.navigator}
+        time={item.time}
+      />
+    );
+  };
 }

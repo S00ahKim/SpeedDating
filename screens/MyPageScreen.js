@@ -1,27 +1,33 @@
-import React from 'react';
-import { ScrollView, StyleSheet } from 'react-native';
-import { ExpoLinksView } from '@expo/samples';
+import React from "react";
+import { View, Text } from "react-native";
+import { createStackNavigator, createAppContainer } from "react-navigation";
 
-export default class LinksScreen extends React.Component {
+class MyPageScreen extends React.Component {
   static navigationOptions = {
-    title: 'MyPage',
+    title: '마이페이지',
   };
 
   render() {
     return (
-      <ScrollView style={styles.container}>
-        {/* Go ahead and delete ExpoLinksView and replace it with your
-           * content, we just wanted to provide you with some helpful links */}
-        <ExpoLinksView />
-      </ScrollView>
+      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+        <Text>Home Screen</Text>
+      </View>
     );
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: 15,
-    backgroundColor: '#fff',
+const AppNavigator = createStackNavigator(
+  {
+    MyPage: MyPageScreen,
+    EditProfile: EditProfileScreen,
+    SendSignal: SendSignalScreen,
+    ChargeSnow: ChargeSnowScreen,
+    Songyi: SongyiScreen,
+    DeleteProfile: DeleteProfileScreen
   },
-});
+  {
+    initialRouteName: "MyPage"
+  }  
+);
+
+export default createAppContainer(AppNavigator);

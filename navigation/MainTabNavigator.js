@@ -4,11 +4,27 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 
 import TabBarIcon from '../components/TabBarIcon';
 
-import SpeedDatingScreen from '../screens/SpeedDatingScreen';
-import SignalScreen from '../screens/SignalScreen';
-import ChattingScreen from '../screens/ChattingScreen';
 import MyPageScreen from '../screens/MyPageScreen';
+import SpeedDatingScreen from '../screens/SpeedDatingScreen';
+import NotificationScreen from '../screens/NotificationScreen';
+import ChattingScreen from '../screens/ChattingScreen';
 
+//마이페이지
+const MyPageStack = createStackNavigator({
+  MyPage: MyPageScreen,
+});
+
+MyPageStack.navigationOptions = {
+  tabBarLabel: 'MyPage',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon
+      focused={focused}
+      name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'}
+    />
+  ),
+};
+
+//스피드데이팅
 const SpeedDatingStack = createStackNavigator({
   SpeedDating: SpeedDatingScreen,
 });
@@ -27,12 +43,13 @@ SpeedDatingStack.navigationOptions = {
   ),
 };
 
-const SignalStack = createStackNavigator({
-  Signal: SignalScreen,
+//알림
+const NotificationStack = createStackNavigator({
+  Notification: NotificationScreen,
 });
 
-SignalStack.navigationOptions = {
-  tabBarLabel: 'Signal',
+NotificationStack.navigationOptions = {
+  tabBarLabel: 'Notification',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
@@ -41,6 +58,7 @@ SignalStack.navigationOptions = {
   ),
 };
 
+//개인채팅
 const ChattingStack = createStackNavigator({
   Chatting: ChattingScreen,
 });
@@ -55,23 +73,9 @@ ChattingStack.navigationOptions = {
   ),
 };
 
-const MyPageStack = createStackNavigator({
-  MyPage: MyPageScreen,
-});
-
-MyPageStack.navigationOptions = {
-  tabBarLabel: 'MyPage',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'}
-    />
-  ),
-};
-
 export default createBottomTabNavigator({
-  SpeedDatingScreen,
-  SignalScreen,
-  ChattingScreen,
   MyPageScreen,
+  SpeedDatingScreen,
+  NotificationScreen,
+  ChattingScreen,
 });
