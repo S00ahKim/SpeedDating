@@ -26,15 +26,15 @@ class MyPageScreen extends React.Component {
           <Text style={styles.listitemtxt}> 닉네임 들어갈 곳 </Text>
         </View>
         <View style={styles.listitem}>
-          <Text style={styles.listitemtxt}> 프로필 수정 </Text>
+          <Text style={styles.listitemtxt} onPress={() => this.props.navigation.navigate('EditProfile')}> 프로필 수정 </Text>
         </View><View style={styles.listitem}>
-          <Text style={styles.listitemtxt}> 시그널 보내기 </Text>
+          <Text style={styles.listitemtxt} onPress={() => this.props.navigation.navigate('SendSignal')}> 시그널 보내기 </Text>
         </View><View style={styles.listitem}>
-          <Text style={styles.listitemtxt}> 눈송이 충전 </Text>
+          <Text style={styles.listitemtxt} onPress={() => this.props.navigation.navigate('ChargeSnow')}> 눈송이 충전 </Text>
         </View><View style={styles.listitem}>
-          <Text style={styles.listitemtxt}> 램프의 요정 송이 </Text>
+          <Text style={styles.listitemtxt} onPress={() => this.props.navigation.navigate('Songyi')}> 램프의 요정 송이 </Text>
         </View><View style={styles.listitem}>
-          <Text style={styles.listitemtxt}> 계정 삭제 </Text>
+          <Text style={styles.listitemtxt} onPress={() => this.props.navigation.navigate('DeleteProfile')}> 계정 삭제 </Text>
         </View>
       </View>
     );
@@ -50,7 +50,6 @@ const styles = StyleSheet.create({
   },
   img:{
     flex: 3,
-    alignContent: 'center',
   },
   imgd:{
     alignSelf: 'center',
