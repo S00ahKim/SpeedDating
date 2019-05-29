@@ -1,19 +1,16 @@
 import React from 'react';
-import { ScrollView, StyleSheet } from 'react-native';
-import { ExpoLinksView } from '@expo/samples';
+import { View, Text, StyleSheet } from 'react-native';
 
-export default class LinksScreen extends React.Component {
+export default class NotificationScreen extends React.Component {
   static navigationOptions = {
-    title: 'Notification',
+    title: '알림',
   };
 
   render() {
     return (
-      <ScrollView style={styles.container}>
-        {/* Go ahead and delete ExpoLinksView and replace it with your
-           * content, we just wanted to provide you with some helpful links */}
-        <ExpoLinksView />
-      </ScrollView>
+      <View>
+        <Text> 알림이 들어올 곳 </Text>
+      </View>
     );
   }
 }
