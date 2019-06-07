@@ -1,4 +1,5 @@
 import React from 'react';
+import { ListItem } from 'react-native-elements';
 import { View, Text, StyleSheet } from 'react-native';
 
 const list = [

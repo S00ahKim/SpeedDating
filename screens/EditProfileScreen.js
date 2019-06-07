@@ -8,7 +8,9 @@ export default class EditProfileScreen extends React.Component {
   
     render() {
       return (
-        <View> 내 정보 수정 </View>
+        <View> 
+          <Text>임시</Text> 
+        </View>
       );
     }
   }
