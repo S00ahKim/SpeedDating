@@ -1,6 +1,17 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
+const list = [
+  {
+    title: 'Appointments',
+    icon: 'av-timer'
+  },
+  {
+    title: 'Trips',
+    icon: 'flight-takeoff'
+  }
+]
+
 export default class NotificationScreen extends React.Component {
   static navigationOptions = {
     title: '알림',
@@ -9,7 +20,15 @@ export default class NotificationScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text> 알림이 들어올 곳 </Text>
+        {
+          list.map((item, i) => (
+            <ListItem
+              key={i}
+              title={item.title}
+              leftIcon={{ name: item.icon }}
+            />
+          ))
+        }
       </View>
     );
   }
