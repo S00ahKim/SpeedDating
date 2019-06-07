@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
   },
   navigationBarTitle: {
     color: "#FFFFFF",
-    fontSize: 16
+    fontSize: 25
   },
   statusBar: {
     height: 20,
@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
   }
 });
 
-export default class NavigationBar extends Component {
+class NavigationBar extends Component {
   render() {
     return (
       <View>
@@ -35,3 +35,5 @@ export default class NavigationBar extends Component {
     );
   }
 }
+
+export default NavigationBar;

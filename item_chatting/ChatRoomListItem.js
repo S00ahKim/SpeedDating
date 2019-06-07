@@ -32,12 +32,12 @@ class ChatRoomListItem extends Component {
     );
   }
 
-  // handlePress = () => {
-  //   this.props.navigator.push({
-  //     screen: "chat.ChatRoom",
-  //     title: "ChatRoom"
-  //   });
-  // };
+  handlePress = () => {
+    this.props.navigator.push({
+      screen: "chat.ChatRoom",
+      title: "ChatRoom"
+    });
+  };
 }
 
 export default ChatRoomListItem;

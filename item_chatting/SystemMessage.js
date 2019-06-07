@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 
-// 시스템 메시지
-
 const styles = StyleSheet.create({
   systemMessage: {
     alignItems: "center",
@@ -23,7 +21,7 @@ const styles = StyleSheet.create({
   }
 });
 
-export default class SystemMessage extends Component {
+class SystemMessage extends Component {
   render() {
     return (
       <View style={styles.systemMessage}>
@@ -39,3 +37,5 @@ export default class SystemMessage extends Component {
     );
   }
 }
+
+export default SystemMessage;

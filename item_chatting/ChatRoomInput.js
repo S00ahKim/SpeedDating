@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { StyleSheet, TextInput, TouchableOpacity, View } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 
-// 메시지 입력창
 const styles = StyleSheet.create({
   container: {},
   sendButton: {
@@ -24,7 +23,7 @@ const styles = StyleSheet.create({
   }
 });
 
-export default class ChatRoomInput extends Component {
+class ChatRoomInput extends Component {
   constructor(props) {
     super(props);
 
@@ -61,3 +60,5 @@ export default class ChatRoomInput extends Component {
     this.setState({ text: '' });
   }
 }
+
+export default ChatRoomInput;

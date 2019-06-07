@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import Chatting from "../item_chatting/ChatRoom";
+import Chatting from "../item_chatting/App";
 
 export default class App extends Component {
   

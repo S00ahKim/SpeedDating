@@ -8,7 +8,7 @@ export default class NotificationScreen extends React.Component {
 
   render() {
     return (
-      <View>
+      <View style={styles.container}>
         <Text> 알림이 들어올 곳 </Text>
       </View>
     );

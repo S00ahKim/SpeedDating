@@ -1,6 +1,5 @@
 import React from 'react';
-import { Platform } from 'react-native';
-import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
+import { createBottomTabNavigator } from 'react-navigation';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
@@ -8,28 +7,6 @@ import MyPageScreen from '../screens/MyPageScreen';
 import SpeedDatingScreen from '../screens/SpeedDatingScreen';
 import NotificationScreen from '../screens/NotificationScreen';
 import ChattingScreen from '../screens/ChattingScreen';
-
-//마이페이지
-const MyPageStack = createStackNavigator({
-  MyPage: MyPageScreen,
-});
-
-//스피드데이팅
-const SpeedDatingStack = createStackNavigator({
-  SpeedDating: SpeedDatingScreen,
-});
-
-
-//알림
-const NotificationStack = createStackNavigator({
-  Notification: NotificationScreen,
-});
-
-
-//개인채팅
-const ChattingStack = createStackNavigator({
-  Chatting: ChattingScreen,
-});
 
 
 export default createBottomTabNavigator({

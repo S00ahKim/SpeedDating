@@ -13,7 +13,6 @@ import SystemMessage from "./SystemMessage";
 import MessageBubble from "./MessageBubble";
 import ChatRoomInput from "./ChatRoomInput";
 
-// 채팅창
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "#1BA2FB",
@@ -51,7 +50,7 @@ const messages = [
   },
 ];
 
-export default class ChatRoom extends Component {
+class ChatRoom extends Component {
   ws;
   isSocketOpen = false;
 
@@ -146,3 +145,5 @@ export default class ChatRoom extends Component {
     );
   };
 }
+
+export default ChatRoom;

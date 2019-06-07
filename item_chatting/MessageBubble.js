@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
   }
 });
 
-export default class MessageBubble extends Component {
+class MessageBubble extends Component {
   render() {
     return (
       <View
@@ -77,3 +77,5 @@ export default class MessageBubble extends Component {
     );
   }
 }
+
+export default MessageBubble;

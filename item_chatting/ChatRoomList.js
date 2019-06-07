@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
   }
 });
 
-export default class ChatRoomList extends Component {
+class ChatRoomList extends Component {
   constructor(props) {
     super(props);
 
@@ -22,7 +22,7 @@ export default class ChatRoomList extends Component {
   }
 
   componentDidMount() {
-    fetch("http://localhost:3000/chat-rooms")
+    fetch("http://localhost:19002/chat-rooms")
       .then(response => {
         return response.json();
       })
@@ -52,3 +52,5 @@ export default class ChatRoomList extends Component {
     );
   };
 }
+
+export default ChatRoomList;
