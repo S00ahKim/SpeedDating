@@ -13,6 +13,7 @@ export default class EditProfileScreen extends React.Component {
  
   handleCancel = () => {
     this.setState({ dialogVisible: false });
+    goBack()
   };
  
   handleDelete = () => {
