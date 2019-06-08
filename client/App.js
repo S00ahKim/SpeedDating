@@ -8,6 +8,7 @@ import {
   StyleSheet } from 'react-native';
 import { createStackNavigator, createSwitchNavigator, createAppContainer } from 'react-navigation';
 import { AppLoading, Asset, Font, Icon } from 'expo';
+import { Container, Header, Content, Form, Item, Input, Label, Text } from 'native-base';
 
 import AppNavigator from './navigation/AppNavigator';
 
@@ -16,14 +17,32 @@ class SignInScreen extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <Button title="로그인" onPress={this._signInAsync} />
-      </View>
+      <Container style={styles.container}>
+        <Header />
+        <Content>
+          <Form>
+            <Item floatingLabel>
+              <Label>전화번호</Label>
+              <Input />
+            </Item>
+            <Item floatingLabel last>
+              <Label>비밀번호</Label>
+              <Input />
+            </Item>
+          </Form>
+          <Button full light onPress={this._signInAsync}>
+            <Text> 로그인 </Text>
+          </Button>
+          <Button full>
+            <Text> 페이스북으로 로그인 </Text>
+          </Button>
+        </Content>
+      </Container>
     );
   }
 
   _signInAsync = async () => {
-    await AsyncStorage.setItem('userToken', 'dfe');
+    await AsyncStorage.setItem('userToken', 'dbwjxhzmsdPtl');
     this.props.navigation.navigate('App');
   };
 }

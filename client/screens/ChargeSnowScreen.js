@@ -1,7 +1,6 @@
 import React from "react";
 import { View, Text } from "react-native";
-import { ListItem } from 'react-native-elements';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import { ListItem, Icon } from 'react-native-elements';
 
 export default class EditProfileScreen extends React.Component {
     static navigationOptions = {
@@ -10,12 +9,13 @@ export default class EditProfileScreen extends React.Component {
   
     render() {
       return (
-        <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+        <View>
           <ListItem
             title= {
-              <Icon name = 'thumb-up' size={20}> 
-                <Text> 페이스북으로 공유 </Text>
-              </Icon>
+              <Text> 페이스북으로 공유하기 </Text>
+            }
+            leftIcon = {
+              <Icon name='thumb-up'/>
             }
             subtitle = {
               <Text> 10 눈송이 </Text>
@@ -26,9 +26,10 @@ export default class EditProfileScreen extends React.Component {
           />
           <ListItem
             title= {
-              <Icon name = 'question-answer' size={20}> 
-                <Text> 카카오톡으로 공유 </Text>
-              </Icon>
+              <Text> 카카오톡으로 공유하기 </Text>
+            }
+            leftIcon = {
+              <Icon name='forum'/>
             }
             subtitle = {
               <Text> 10 눈송이 </Text>
@@ -39,12 +40,13 @@ export default class EditProfileScreen extends React.Component {
           />
           <ListItem
             title= {
-              <Icon name = 'theaters' size={20}> 
-                <Text> 교육 이수 </Text>
-              </Icon>
+              <Text> 데이트 폭력 교육 이수 </Text>
+            }
+            leftIcon = {
+              <Icon name='theaters'/>
             }
             subtitle = {
-              <Text> 15 눈송이 </Text>
+              <Text> 10 눈송이 </Text>
             }
             onPress={() => this.props.navigation.navigate('SendSignal')}
             chevronColor="white"
