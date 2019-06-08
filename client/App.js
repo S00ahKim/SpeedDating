@@ -10,6 +10,8 @@ import { createStackNavigator, createSwitchNavigator, createAppContainer } from 
 import { AppLoading, Asset, Font, Icon } from 'expo';
 import { Container, Header, Content, Form, Item, Input, Label, Text } from 'native-base';
 
+import ApiKeys from './constants/ApiKeys';
+import * as firebase from 'firebase';
 import AppNavigator from './navigation/AppNavigator';
 
 // 로그인하지 않았을 때 뜨는 화면
@@ -50,9 +52,17 @@ class SignInScreen extends React.Component {
 // 로그인을 했을 때의 화면 (로그아웃은 만들지 않음. 앱을 삭제해야 함.)
 class HomeScreen extends React.Component {
 
-  state = {
-    isLoadingComplete: false,
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLoadingComplete: false,
+    }
+
+    //파이어베이스 initialize
+    if (!firebase.apps.length) {
+      firebase.initializeApp(ApiKeys.FireaseConfig);
+    }
+  }
 
   render() {
     if (!this.state.isLoadingComplete && !this.props.skipLoadingScreen) {
