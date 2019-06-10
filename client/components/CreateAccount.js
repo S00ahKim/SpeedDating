@@ -13,7 +13,7 @@ class CreateAccount extends React.Component {
 
   state = {
     name: '',
-    email: 'ex. iloveyou@google.com',
+    email: '',
     password: '',
     avatar: '',
   };
@@ -34,22 +34,6 @@ class CreateAccount extends React.Component {
   onChangeTextEmail = email => this.setState({ email });
   onChangeTextPassword = password => this.setState({ password });
   onChangeTextName = name => this.setState({ name });
-
-  createAccount = async (user) => {
-    firebase.auth()
-    .createUserWithEmailAndPassword(user.email, user.password)
-    .then(function() {
-      var userf = firebase.auth().currentUser;
-      userf.updateProfile({ displayName: user.name})
-      .then(function() {
-        alert("회원 가입이 완료되었습니다.");
-      }, function(error) {
-        console.warn("이미 존재하는 이름입니다.");
-      });
-    }, function(error) {
-      alert("회원 가입에 실패했습니다. 에러 메시지: "+error.message);
-    });
-  }
 
   onImageUpload = async () => {
     const { status: cameraRollPerm } = await Permissions.askAsync(
@@ -115,6 +99,7 @@ class CreateAccount extends React.Component {
                         onChangeText={this.onChangeTextEmail}
                         value={this.state.email}
                         style={styles.caFormTextInput}
+                        placeholder="ex. iloveyou@google.com"
                     />
                     <Text style={styles.title}>비밀번호</Text>
                     <TextInput
@@ -122,6 +107,7 @@ class CreateAccount extends React.Component {
                         onChangeText={this.onChangeTextPassword}
                         style={styles.caFormTextInput}
                         value={this.state.password}
+                        placeholder="여섯 자리 이상의 비밀번호를 입력해 주세요."
                     />
                     <Text style={styles.title}>닉네임</Text>
                     <TextInput
@@ -129,6 +115,7 @@ class CreateAccount extends React.Component {
                         onChangeText={this.onChangeTextName}
                         style={styles.caFormTextInput}
                         value={this.state.name}
+                        placeholder="개성을 표현하는 닉네임을 입력해 주세요."
                     />
                     <Button
                         title="회원 가입"
