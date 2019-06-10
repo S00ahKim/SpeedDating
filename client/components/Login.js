@@ -64,7 +64,7 @@ export default class Login extends React.Component {
                                 <TextInput 
                                     placeholder="email" 
                                     placeholderColor="#c4c3cb" 
-                                    style={styles.loginFormTextInput}
+                                    style={styles.loginFormTextInput} 
                                     onChangeText={(email) => this.setState({email})}
                                     value={this.state.email} />
                                 <TextInput 

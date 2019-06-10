@@ -1,21 +1,20 @@
 import React from 'react';
 import { Constants, ImagePicker, Permissions } from 'expo';
 import {
-  StyleSheet, Text,
-  TextInput, View,
-  Button, ImageEditor,
+  StyleSheet, Text, Keyboard,
+  TextInput, KeyboardAvoidingView, View,TouchableWithoutFeedback,
+  ImageEditor, TouchableOpacity, Image,
 } from 'react-native';
+import { Button } from 'react-native-elements';
+
 import firebaseSvc from '../FirebaseSvc';
 
 class CreateAccount extends React.Component {
-  static navigationOptions = {
-    title: 'Scv Chatter',
-  };
 
   state = {
-    name: 'no name',
-    email: 'test3@gmail.com',
-    password: 'test123',
+    name: '',
+    email: 'ex. iloveyou@google.com',
+    password: '',
     avatar: '',
   };
 
@@ -28,7 +27,7 @@ class CreateAccount extends React.Component {
       };
       await firebaseSvc.createAccount(user);
     } catch ({ message }) {
-      console.log('create account failed. catch error:' + message);
+      console.log('회원 가입에 실패했습니다. 에러 메시지: ' + message);
     }
   };
 
@@ -43,12 +42,12 @@ class CreateAccount extends React.Component {
       var userf = firebase.auth().currentUser;
       userf.updateProfile({ displayName: user.name})
       .then(function() {
-        alert("User was created successfully.");
+        alert("회원 가입이 완료되었습니다.");
       }, function(error) {
-        console.warn("Error update displayName.");
+        console.warn("이미 존재하는 이름입니다.");
       });
     }, function(error) {
-      alert("Create account failed. Error: "+error.message);
+      alert("회원 가입에 실패했습니다. 에러 메시지: "+error.message);
     });
   }
 
@@ -64,7 +63,7 @@ class CreateAccount extends React.Component {
           aspect: [4, 3],
         });
         console.log(
-          'ready to upload... pickerResult json:' + JSON.stringify(pickerResult)
+          '이 이미지로 올릴게요 ---> :' + JSON.stringify(pickerResult)
         );
 
         var wantedMaxSize = 150;
@@ -95,44 +94,51 @@ class CreateAccount extends React.Component {
         await firebaseSvc.updateAvatar(uploadUrl);
       }
     } catch (err) {
-      console.log('onImageUpload error:' + err.message);
-      alert('Upload image error:' + err.message);
+      console.log('이미지 업로드 에러:' + err.message);
+      alert('이미지 업로드 에러:' + err.message);
     }
   };
 
   render() {
     return (
-      <View>
-        <Text style={styles.title}>Email:</Text>
-        <TextInput
-          style={styles.nameInput}
-          placeHolder="test3@gmail.com"
-          onChangeText={this.onChangeTextEmail}
-          value={this.state.email}
-        />
-        <Text style={styles.title}>Password:</Text>
-        <TextInput
-          style={styles.nameInput}
-          onChangeText={this.onChangeTextPassword}
-          value={this.state.password}
-        />
-        <Text style={styles.title}>Name:</Text>
-        <TextInput
-          style={styles.nameInput}
-          onChangeText={this.onChangeTextName}
-          value={this.state.name}
-        />
-        <Button
-          title="Create Account"
-          style={styles.buttonText}
-          onPress={this.onPressCreate}
-        />
-        <Button
-          title="Upload Avatar Image 2"
-          style={styles.buttonText}
-          onPress={this.onImageUpload}
-        />
-      </View>
+      <KeyboardAvoidingView style={styles.containerView} behavior="padding">
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+            <View style={styles.caScreenContainer}>
+                <View style={styles.caFormView}>
+                    <Text style={styles.imagetitle}> ♥ 사진을 올리면 매칭 확률 up up! ♥ </Text>
+                    <TouchableOpacity style={styles.imagestyle} onPress={this.onImageUpload}>
+                        <Image source={require('../assets/images/default_profile.jpg')} />
+                    </TouchableOpacity>
+                    <Text style={styles.title}>이메일</Text>
+                    <TextInput
+                        style={styles.nameInput}
+                        onChangeText={this.onChangeTextEmail}
+                        value={this.state.email}
+                        style={styles.caFormTextInput}
+                    />
+                    <Text style={styles.title}>비밀번호</Text>
+                    <TextInput
+                        style={styles.nameInput}
+                        onChangeText={this.onChangeTextPassword}
+                        style={styles.caFormTextInput}
+                        value={this.state.password}
+                    />
+                    <Text style={styles.title}>닉네임</Text>
+                    <TextInput
+                        style={styles.nameInput}
+                        onChangeText={this.onChangeTextName}
+                        style={styles.caFormTextInput}
+                        value={this.state.name}
+                    />
+                    <Button
+                        title="회원 가입"
+                        buttonStyle={styles.caButton}
+                        onPress={this.onPressCreate}
+                    />
+                </View>
+            </View>
+        </TouchableWithoutFeedback>
+      </KeyboardAvoidingView>
     );
   }
 }
@@ -152,10 +158,60 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     fontSize: offset,
   },
-  buttonText: {
-    marginLeft: offset,
-    fontSize: 42,
+  caButton: {
+    backgroundColor: '#5C7CB5',
+    borderRadius: 5,
+    height: 45,
+    paddingLeft: 10,
+    marginLeft: 15,
+    marginRight: 15,
+    marginTop: 5,
+    marginBottom: 5,
   },
+  containerView: {
+    flex: 1,
+    },
+    caScreenContainer: {
+        flex: 1,
+    },
+    caFormView: {
+        flex: 1
+    },
+    caFormTextInput: {
+        height: 43,
+        fontSize: 14,
+        borderRadius: 5,
+        borderWidth: 1,
+        borderColor: '#eaeaea',
+        backgroundColor: '#fafafa',
+        paddingLeft: 10,
+        marginLeft: 15,
+        marginRight: 15,
+        marginTop: 5,
+        marginBottom: 5,
+    },
+    title: {
+        marginTop: offset,
+        marginLeft: offset,
+        fontSize: offset,
+    },
+    imagetitle: {
+        marginTop: 30,
+        textAlign: 'center',
+        fontSize: offset,
+    },
+    imagestyle: {
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    nameInput: {
+        height: offset * 2,
+        margin: offset,
+        paddingHorizontal: offset,
+        borderColor: '#111111',
+        borderWidth: 1,
+        fontSize: offset,
+    },
 });
 
 export default CreateAccount;
