@@ -106,8 +106,8 @@ class CreateAccount extends React.Component {
             <View style={styles.caScreenContainer}>
                 <View style={styles.caFormView}>
                     <Text style={styles.imagetitle}> ♥ 사진을 올리면 매칭 확률 up up! ♥ </Text>
-                    <TouchableOpacity style={styles.imagestyle} onPress={this.onImageUpload}>
-                        <Image source={require('../assets/images/default_profile.jpg')} />
+                    <TouchableOpacity style={styles.imagealign} onPress={this.onImageUpload}>
+                        <Image style={styles.imagestyle} source={require('../assets/images/default_profile.jpg')} />
                     </TouchableOpacity>
                     <Text style={styles.title}>이메일</Text>
                     <TextInput
@@ -199,10 +199,14 @@ const styles = StyleSheet.create({
         marginTop: 30,
         textAlign: 'center',
         fontSize: offset,
+        marginBottom: 5,
     },
-    imagestyle: {
+    imagealign: {
         justifyContent: 'center',
         alignItems: 'center',
+    },
+    imagestyle: {
+      borderRadius: 400/ 2,
     },
     nameInput: {
         height: offset * 2,
