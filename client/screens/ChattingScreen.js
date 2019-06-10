@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 
-import Chatting from "../item_chatting/App";
+import Chat from '../components/Chat';
 
 export default class App extends Component {
   
   render() {
     return (
-      <Chatting />
+      <Chat />
     );
   }
 }
