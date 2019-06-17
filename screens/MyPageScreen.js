@@ -11,7 +11,6 @@ export default class MyPageScreen extends React.Component {
 
   render() {
     console.log("이 사람이 로그인 중 ---> ", firebaseSvc.auth().currentUser.displayName);
-    console.log('이미지', firebaseSvc.auth().currentUser.photoURL )
     return (
       <View>
         <View style = {{ alignItems: 'center' }} >

@@ -1,7 +1,7 @@
 import React from 'react';
 import { ScrollView, Text, StyleSheet, Dimensions, View, TextInput, TouchableOpacity, ToastAndroid } from 'react-native';
 import { ListItem, Icon, Button } from 'react-native-elements';
-import firebaseSvc from '../FirebaseSvc';
+import firebaseSvc, { firebaseBasic } from '../FirebaseSvc';
 
 // 보내는 사람이 여러 디비에 뿌리는 것이 아니라 관련 키워드 가진 사람 찾아서 걔가 만든 시그널 카드를 봄
 // 나중에 뭐 검색을 막든가,, 시그널 일정 시간 지나면 지워지든가 해도 될듯
@@ -74,7 +74,15 @@ export default class NotificationScreen extends React.Component {
   }
 
   connectChat(makechatwith) {
-    console.log('이제 이사람이랑 채팅만듦 ---> ', makechatwith);
+    //채팅창 개설하는 함수~
+    firebaseSvc.database().ref('users/'+makechatwith.to).once('value').then((snapshot) =>{
+      var megender = snapshot.val().gender;
+      var myname = snapshot.val().name;
+      firebaseSvc.database().ref('users/'+makechatwith.from).once('value').then((snapshot) =>{
+        var yourname = snapshot.val().name;
+        firebaseBasic.makeChatRoom(makechatwith.to, makechatwith.from, megender, myname, yourname);
+      })
+    })
   }
 
   render() {
@@ -128,7 +136,7 @@ export default class NotificationScreen extends React.Component {
                         <Button
                           title="연결"
                           type="clear"
-                          onPress={this.connectChat.bind(this.reply)}
+                          onPress={this.connectChat.bind(this,reply)}
                         />
                       </View>
                     </View>
@@ -187,7 +195,7 @@ export default class NotificationScreen extends React.Component {
                         <Button
                           title="연결"
                           type="clear"
-                          onPress={this.connectChat.bind(this.reply)}
+                          onPress={this.connectChat.bind(this,reply)}
                         />
                       </View>
                     </View>

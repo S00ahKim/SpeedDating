@@ -4,7 +4,7 @@ import { createBottomTabNavigator } from 'react-navigation';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import MypageNavigator from './MyPageNavigator';
-import SpeedDatingScreen from '../screens/SpeedDatingScreen';
+import SpeedDatingNavigator from './SpeedDatingNavigator';
 import NotificationScreen from '../screens/NotificationScreen';
 import ChattingScreen from '../screens/ChattingScreen';
 
@@ -32,7 +32,7 @@ export default createBottomTabNavigator({
   },
 
   만남: {
-    screen: SpeedDatingScreen,
+    screen: SpeedDatingNavigator,
     navigationOptions: () => ({
       tabBarIcon: ({tintColor}) => (
         <Icon

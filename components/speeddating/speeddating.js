@@ -62,6 +62,7 @@ class SpeedDating extends Component {
     var newpeople = this.state.people;
     var selected = this.state.selected;
     var i;
+    var userID = this.currentUser.uid;
     firebaseSvc.database().ref('users/'+userID).once('value').then((snapshot) => {
       var mygender = snapshot.val().gender;
 
@@ -72,13 +73,13 @@ class SpeedDating extends Component {
         if (mygender == 'boy') {
           chatroom = {
             boy: this.currentUser.uid,
-            girl: '',
+            girl: newpeople[i],
             messages: {},
             heart: 0
           }
         } else {
           chatroom = {
-            boy: '',
+            boy: newpeople[i],
             girl: this.currentUser.uid,
             messages: {},
             heart: 0
@@ -143,7 +144,7 @@ class SpeedDating extends Component {
       } else{
         var mygender = 'girl';
       }//수정필요
-      firebaseSvc.database().ref('sdchats').orderByChild(mygender).equalTo(mygender).on("child_added", (snapshot) => {
+      firebaseSvc.database().ref('sdchats').orderByChild(mygender).equalTo(userID).on("child_added", (snapshot) => {
         if (snapshot.val()){
           people.push(snapshot.val());
         }

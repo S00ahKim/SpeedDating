@@ -66,6 +66,34 @@ class FirebaseSvc {
     return snapshot.ref.getDownloadURL()
   }
 
+  makeChatRoom(me, you, megender, myname, yourname) {
+    let chatroom;
+    if (megender == 'boy'){
+      chatroom = {
+        boy: me,
+        girl: you,
+        messages: {},
+        boyname: myname,
+        girlname: yourname,
+      }
+    }else {
+      chatroom = {
+        boy: you,
+        girl: me,
+        messages: {},
+        boyname: yourname,
+        girlname: myname,
+      }
+    }
+    firebase.database().ref('messages').push().set(chatroom, (error) => {
+      if (error){
+        console.log('챗창 개설에 문제 있음');
+      }else {
+        console.log('잘 만들어짐');
+      }
+    })
+  }
+
   // updateAvatar = async (uploadUrl) => {
   //   var user = firebase.auth().currentUser;
   //   user.updateProfile({
