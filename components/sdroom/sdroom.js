@@ -15,6 +15,11 @@ const background = require('../../assets/images/background.png');
 
 class SDroom extends Component {
 
+  
+  static navigationOptions = {
+    header: null,
+  };
+
   messages = [];
   color;
 

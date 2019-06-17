@@ -40,6 +40,11 @@ class SpeedDating extends Component {
     this.selectPeople();
   }
 
+  
+  static navigationOptions = {
+    header: null,
+  };
+
   messages = [];
   color;
   currentUser = firebaseSvc.auth().currentUser;

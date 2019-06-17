@@ -1,13 +1,13 @@
 import React from 'react';
 import { createStackNavigator } from 'react-navigation';
 
-import SpeedDatingScreen from '../screens/SpeedDatingScreen';
-import DateScreen from '../screens/DateScreen';
+import SpeedDatingList from "../components/sdroom";
+import SpeedDating from "../components/speeddating";
 
 export default SpeedDatingNavigator = createStackNavigator(
     {
-      Main: SpeedDatingScreen,
-      Date: DateScreen,
+      Main: SpeedDatingList,
+      Date: SpeedDating,
     },
     {
       initialRouteName: "Main"

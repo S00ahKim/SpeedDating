@@ -7,11 +7,11 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  loadMessages: () => {
-    dispatch(loadMessages());
+  loadMessages: (address) => {
+    dispatch(loadMessages(address));
   },
-  putMessage: (message, user) => {
-    dispatch(putMessage(message, user));
+  putMessage: (message, user, address) => {
+    dispatch(putMessage(message, user, address));
   },
 });
 

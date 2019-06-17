@@ -19,11 +19,36 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import styles from './style';
 import moment from 'moment';
 import firebase from '../../FirebaseSvc';
+import firebaseSvc from '../../FirebaseSvc';
 
 const background = require('../../assets/images/background.png');
-const logo = require('../../assets/images/icon.png');
 
 class Chat extends Component {
+  chatroom = this.props.navigation.state.params.connect;
+  
+  findAddress () {
+    var address;
+    var girluser = this.chatroom.girl;
+    firebaseSvc.database().ref('messages').orderByChild('boy').equalTo(this.chatroom.boy).on('value', (snapshot)=> {
+      snapshot.forEach(function(child) {
+        if (child.val().girl == girluser){
+          var addressurl = String(child.ref);
+          var arr = addressurl.split('/');
+          var len = arr.length;
+          address = arr[len-1];
+          address.substr(0, address.length -1);
+          return true
+        }
+      })
+    })
+    //리턴위치때문에 삽질;;
+    console.log('address', address)
+    return address;
+  }
+  
+  static navigationOptions = {
+    header: null,
+  };
 
   messages = [];
   color;
@@ -34,13 +59,14 @@ class Chat extends Component {
     super(props);
     this.state = {
       message: '',
-      user: this.currentUser
+      user: this.currentUser,
     };
   }
 
   componentWillMount() {
     const { loadMessages } = this.props;
-    loadMessages();
+    var address = this.findAddress();
+    loadMessages(address);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -57,7 +83,8 @@ class Chat extends Component {
 
   onPutMessage(){
     const { putMessage } = this.props;
-    putMessage(this.state.message, this.state.user);
+    var address = this.findAddress();
+    putMessage(this.state.message, this.state.user, address);
   }
 
   onSignOut(){
@@ -70,6 +97,7 @@ class Chat extends Component {
   }
 
   render() {
+    
     return (
         <View style={styles.container}>
           <View>

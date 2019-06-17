@@ -1,8 +1,6 @@
 import * as types from './constants';
 import firebaseSvc from '../../FirebaseSvc';
 
-const FIREBASE_REF_MESSAGES = firebaseSvc.database().ref('messages');
-
 export function messagesLoadRequest() {
   return {
     type: types.MESSAGES_LOAD_REQUEST,
@@ -27,11 +25,14 @@ export function getChatItems(data){
   return data ? Object.keys(data).map(key => data[key]) : [];
 }
 
-export function loadMessages() {
+export function loadMessages(address) {
+  console.log('로딩중.........')
+  console.log('로딩중인 챗룸정보   ', address)
   return (dispatch) => {
     dispatch(messagesLoadRequest());
-    return FIREBASE_REF_MESSAGES.on('value', (snapshot) => {
-        const messages = getChatItems(snapshot.val());
+    return firebaseSvc.database().ref('messages/'+ address).on('value', (snapshot) => {
+        console.log('점검')
+        const messages = getChatItems(snapshot.val().messages);
         dispatch(messagesLoadRequestSuccess(messages));
       }, (errorObject) => {
         dispatch(messagesLoadRequestFail(errorObject.message))
@@ -59,7 +60,7 @@ export function messagePutRequestSuccess(text) {
   };
 }
 
-export function putMessage(message, currentUser) {
+export function putMessage(message, currentUser, address) {
   let chatMessage = {
     text: message,
     createdAt: new Date().getTime(),
@@ -72,12 +73,15 @@ export function putMessage(message, currentUser) {
   }
   return (dispatch) => {
     dispatch(messagePutRequest());
-    return FIREBASE_REF_MESSAGES.push().set(chatMessage, (error) => {
-      if (error) {
-        dispatch(messagePutRequestFail(error.message));
-      } else {
-        dispatch(messagePutRequestSuccess(chatMessage));
-      }
-    });
+    console.log('여기')
+    firebaseSvc.database().ref('messages/'+ address+'/messages').push().set(chatMessage, (error) => {
+        if (error) {
+          console.log('에러')
+          dispatch(messagePutRequestFail(error.message));
+        } else {
+          console.log('잘감')
+          dispatch(messagePutRequestSuccess(chatMessage));
+        }
+    })
   };
 }

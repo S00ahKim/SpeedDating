@@ -5,7 +5,7 @@ import {
   Text,
   ImageBackground,
 } from 'react-native';
-import { ListItem } from 'react-native-elements'
+import { Icon, ListItem } from 'react-native-elements'
 import { NavigationActions } from 'react-navigation';
 import styles from './style';
 import firebase from '../../FirebaseSvc';
@@ -14,6 +14,11 @@ import firebaseSvc from '../../FirebaseSvc';
 const background = require('../../assets/images/background.png');
 
 class Chatroom extends Component {
+
+  
+  static navigationOptions = {
+    header: null,
+  };
 
   messages = [];
   color;
@@ -42,10 +47,6 @@ class Chatroom extends Component {
     }
   }
 
-  moveToChat(chatroom){
-    console.log(chatroom)
-  }
-
   render() {
     return (
         <View style={styles.container}>
@@ -69,12 +70,14 @@ class Chatroom extends Component {
                               title= {
                                 <Text> {message.boyname} ♡ {message.girlname} </Text>
                               }
-                              onPress={() => { console.log('어이') ,this.moveToChat.bind(this,message)} }
+                              onPress={() => this.props.navigation.navigate('Chat', {
+                                connect: message,
+                              }) }
                               chevronColor="white"
                               chevron
                             />
                           );
-                        }else{
+                        }else if (message.boy != userID && message.girl != userID){
                           return (
                             <View style={styles.econtainer}>
                               <View style = {styles.msg}>
