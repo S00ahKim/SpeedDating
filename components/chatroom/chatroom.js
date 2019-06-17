@@ -43,9 +43,7 @@ class Chatroom extends Component {
   }
 
   moveToChat(chatroom){
-    return (
-      console.log(chatroom)
-    )
+    console.log(chatroom)
   }
 
   render() {
@@ -64,14 +62,14 @@ class Chatroom extends Component {
                     .messages
                     .map((message, index) => {
                       var userID = firebaseSvc.auth().currentUser.uid;
-                        if (this.message.boy == userID || this.message.girl == userID) {
+                        if (message.boy == userID || message.girl == userID) {
                           return (
                             <ListItem
                               key = {index}
                               title= {
                                 <Text> {message.boyname} ♡ {message.girlname} </Text>
                               }
-                              onPress={() => {this.moveToChat.bind(this,message)} }
+                              onPress={() => { console.log('어이') ,this.moveToChat.bind(this,message)} }
                               chevronColor="white"
                               chevron
                             />

@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, StyleSheet, Linking, ToastAndroid } from "react-native";
 import { ListItem, Icon } from 'react-native-elements';
 
-export default class EditProfileScreen extends React.Component {
+export default class ChargeSnowScreen extends React.Component {
     static navigationOptions = {
       title: '눈송이 충전',
     };

@@ -6,7 +6,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import MypageNavigator from './MyPageNavigator';
 import SpeedDatingNavigator from './SpeedDatingNavigator';
 import NotificationScreen from '../screens/NotificationScreen';
-import ChattingScreen from '../screens/ChattingScreen';
+import ChattingNavigator from './ChattingNavigator';
 
 
 export default createBottomTabNavigator({
@@ -58,7 +58,7 @@ export default createBottomTabNavigator({
   },
 
   대화: {
-    screen: ChattingScreen,
+    screen: ChattingNavigator,
     navigationOptions: () => ({
       tabBarIcon: ({tintColor}) => (
         <Icon

@@ -4,7 +4,7 @@ import { createStackNavigator } from 'react-navigation';
 import SpeedDatingScreen from '../screens/SpeedDatingScreen';
 import DateScreen from '../screens/DateScreen';
 
-export default MyPageNavigator = createStackNavigator(
+export default SpeedDatingNavigator = createStackNavigator(
     {
       Main: SpeedDatingScreen,
       Date: DateScreen,

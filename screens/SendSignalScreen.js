@@ -5,7 +5,7 @@ import firebaseSvc from "../FirebaseSvc";
 
 // 시그널은 약간,,, 전광판 같은 거임,,,
 
-export default class EditProfileScreen extends React.Component {
+export default class SendSignalScreen extends React.Component {
   state = {
     isDialogVisible: true,
   }
