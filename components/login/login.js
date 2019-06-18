@@ -23,8 +23,8 @@ class Login extends Component {
     }
 
     state = {
-        email: 'admin@speeddating.com',
-        password: 'admin123',
+        email: '',
+        password: '',
     };
 
     componentDidMount() {

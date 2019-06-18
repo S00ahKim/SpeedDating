@@ -10,8 +10,8 @@ const initialState = {
 
 const sdroom = (state = initialState, action) => {
   switch (action.type) {
-    case types.ROOM_LOAD_REQUEST:
-    case types.ROOM_LOAD_REQUEST_FAIL:
+    case types.ROOMSD_LOAD_REQUEST:
+    case types.ROOMSD_LOAD_REQUEST_FAIL:
       return {
         ...state,
         loading: false,
@@ -19,7 +19,7 @@ const sdroom = (state = initialState, action) => {
         messages: {},
         successloadMessages: false,
       };
-    case types.ROOM_LOAD_REQUEST_SUCCESS:
+    case types.ROOMSD_LOAD_REQUEST_SUCCESS:
       return {
         ...state,
         loading: false,

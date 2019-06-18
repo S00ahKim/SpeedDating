@@ -5,17 +5,15 @@ import {
   Text,
   ImageBackground,
 } from 'react-native';
-import { ListItem } from 'react-native-elements'
+import { ListItem, Button, Icon } from 'react-native-elements'
 import { NavigationActions } from 'react-navigation';
-import styles from './style';
-import firebase from '../../FirebaseSvc';
+import styles from '../chatroom/style';
+import firebase, { firebaseBasic } from '../../FirebaseSvc';
 import firebaseSvc from '../../FirebaseSvc';
 
 const background = require('../../assets/images/background.png');
 
 class SDroom extends Component {
-
-  
   static navigationOptions = {
     header: null,
   };
@@ -29,7 +27,7 @@ class SDroom extends Component {
     super(props);
     this.state = {
       message: '',
-      user: this.currentUser
+      user: this.currentUser,
     };
   }
 
@@ -47,12 +45,6 @@ class SDroom extends Component {
     }
   }
 
-  moveToChat(chatroom){
-    return (
-      console.log(chatroom)
-    )
-  }
-
   render() {
     return (
         <View style={styles.container}>
@@ -68,37 +60,37 @@ class SDroom extends Component {
                   {this
                     .messages
                     .map((message, index) => {
-                      var userID = firebaseSvc.auth().currentUser.uid;
-                        if (this.message.boy == userID || this.message.girl == userID) {
-                          return (
+                      return (
                             <ListItem
                               key = {index}
                               title= {
-                                <Text> {message.boyname} ♡ {message.girlname} </Text>
+                                <Text> 당신을 기다리는 사람 </Text>
                               }
-                              onPress={() => {this.moveToChat.bind(this,message)} }
+                              onPress={() => this.props.navigation.navigate('Date', {
+                                connect: message,
+                              }) }
                               chevronColor="white"
                               chevron
                             />
-                          );
-                        }else{
-                          return (
-                            <View style={styles.econtainer}>
-                              <View style = {styles.msg}>
-                                <Icon name = 'volume-off' size={80} color='#fff'/>
-                                <Text style={styles.txt} > 잠시만 </Text>
-                                <Text style={styles.txt} > 기다려 </Text>
-                                <Text style={styles.txt} > 주세요 </Text>
-                              </View>
-                            </View>
-                          )
-                        }
+                      )
+                        //   )
+                        // }else if (message.boy != userID && message.girl != userID){
+                        //   return (
+                        //     <View style={styles.econtainer}>
+                        //       <View style = {styles.msg}>
+                        //         <Icon name = 'volume-off' size={80} color='#fff'/>
+                        //         <Text style={styles.txt} > 잠시만 </Text>
+                        //         <Text style={styles.txt} > 기다려 </Text>
+                        //         <Text style={styles.txt}> 주세요! </Text>
+                        //       </View>
+                        //     </View>
+                        //   )
+                        // }
                     })}
             </ScrollView>
         </View>
     );
   }
 }
-
 
 export default SDroom;

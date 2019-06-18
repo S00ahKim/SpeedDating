@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text, ImageBackground, ScrollView, Image } from "react-native";
 import styles from '../components/chat/style';
+import MsgScreen from '../components/msgscreen';
 
 const background = require('../assets/images/background.png');
 
@@ -51,6 +52,7 @@ export default class SongyiScreen extends React.Component {
                     </View>
                     );
                 })}
+                <MsgScreen />
         </ScrollView>
       </View>
       );

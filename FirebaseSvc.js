@@ -93,6 +93,32 @@ class FirebaseSvc {
       }
     })
   }
+  // 스데는 익명임!!
+  makeSpeedDating(me, you, megender) {
+    let chatroom;
+    if (megender == 'boy'){
+      chatroom = {
+        boy: me,
+        girl: you,
+        messages: {},
+        heart: 0
+      }
+    }else {
+      chatroom = {
+        boy: you,
+        girl: me,
+        messages: {},
+        heart: 0
+      }
+    }
+    firebase.database().ref('sdchats').push().set(chatroom, (error) => {
+      if (error){
+        console.log('챗창 개설에 문제 있음');
+      }else {
+        console.log('잘 만들어짐');
+      }
+    })
+  }
 
   // updateAvatar = async (uploadUrl) => {
   //   var user = firebase.auth().currentUser;

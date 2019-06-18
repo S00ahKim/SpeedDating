@@ -32,6 +32,7 @@ export function loadMessages() {
     dispatch(messagesLoadRequest());
     return FIREBASE_REF_ROOM.on('value', (snapshot) => {
         const messages = getChatroomItems(snapshot.val());
+        console.log(messages)
         dispatch(messagesLoadRequestSuccess(messages));
       }, (errorObject) => {
         dispatch(messagesLoadRequestFail(errorObject.message))

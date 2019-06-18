@@ -1,8 +1,6 @@
 import * as types from './constants';
 import firebaseSvc from '../../FirebaseSvc';
 
-const FIREBASE_REF_SD = firebaseSvc.database().ref('sdchats');
-
 export function messagesLoadRequest() {
   return {
     type: types.SD_LOAD_REQUEST,
@@ -27,12 +25,11 @@ export function getChatItems(data){
   return data ? Object.keys(data).map(key => data[key]) : [];
 }
 
-export function loadMessages() {
-  console.log('로딩 중');
+export function loadMessages(address) {
   return (dispatch) => {
     dispatch(messagesLoadRequest());
-    return FIREBASE_REF_SD.on('value', (snapshot) => {
-        const messages = getChatItems(snapshot.val());
+    return firebaseSvc.database().ref('sdchats/'+ address).on('value', (snapshot) => {
+        const messages = getChatItems(snapshot.val().messages);
         dispatch(messagesLoadRequestSuccess(messages));
       }, (errorObject) => {
         dispatch(messagesLoadRequestFail(errorObject.message))
@@ -61,10 +58,10 @@ export function messagePutRequestSuccess(text) {
   };
 }
 
-export function putMessage(message, currentUser) {
-  console.log(" SD 메시지 보내기");
+export function putMessage(message, currentUser, address) {
+  console.log(" SD 메시지 보내기 to... ", address);
   let chatMessage = {
-    text: message,
+    text: message, 
     createdAt: new Date().getTime(),
     user: {
       id: currentUser.uid,
@@ -75,7 +72,7 @@ export function putMessage(message, currentUser) {
   }
   return (dispatch) => {
     dispatch(messagePutRequest());
-    return FIREBASE_REF_SD.push().set(chatMessage, (error) => {
+    firebaseSvc.database().ref('sdchats/'+ address+'/messages').push().set(chatMessage, (error) => {
       if (error) {
         dispatch(messagePutRequestFail(error.message));
       } else {
