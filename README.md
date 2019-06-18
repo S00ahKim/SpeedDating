@@ -3,5 +3,4 @@
 
 ### 실행 방법
 1. firebaseConfig를 작성한다.
-2. 
-`expo start`
+2. `expo start`
