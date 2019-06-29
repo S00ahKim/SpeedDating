@@ -18,7 +18,8 @@
 2. `expo start`
 
 ### firebaseConfig.js
-```export const firebaseConfig = {
+```
+export const firebaseConfig = {
     apiKey: "어쩌고 저쩌고",
     authDomain: "어쩌고.firebaseapp.com",
     databaseURL: "https://저쩌고.firebaseio.com",
@@ -26,4 +27,5 @@
     storageBucket: "저쩌고.appspot.com",
     messagingSenderId: "어쩌고",
     appId: "저쩌고"
-}```
+}
+```
